@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - @HttpContext.Current.Application["EventName"].ToString()</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink(@HttpContext.Current.Application["EventName"].ToString(), "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @if (Session["User"] != null)
+                    {
+                        if (Session["User"].ToString() == "Admin")
+                        {
+                            <li>@Html.ActionLink("Export Data", "Export", "Admin")</li>
+                            <li>@Html.ActionLink("Monitor SMS Activities", "Dashboard", "Admin")</li>
+                            <li>@Html.ActionLink("Change Event Name", "Event", "Admin")</li>
+                        }
+                    }
+                    @*<li>@Html.ActionLink("About", "About", "Home")</li>*@
+                    @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                </ul>
+
+                @if (Session["User"] != null)
+                {
+                    //using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    //{
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li style="color:white;margin-top:15px; margin-right:20px; ">
+                            @Html.Label("Logged in as " + Session["User"].ToString().ToUpper())
+                        </li>
+                        <li style="color:ghostwhite;">@Html.ActionLink("Log Off", "Logout", "Login", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
+                    </ul>
+
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li style="color:ghostwhite;">@Html.ActionLink("Log in", "Index", "Login", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    </ul>
+                }
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - @HttpContext.Current.Application["EventName"].ToString()</p>
+            <br><br>
+
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    
+    @RenderSection("scripts", required: false)
+</body>
+</html>

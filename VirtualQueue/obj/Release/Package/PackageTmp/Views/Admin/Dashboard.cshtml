@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>SMS Dashboard</h2>
+<br>
+<br>
+
+<b style="color:forestgreen;font-size:25px;">
+    Twilio API Credentials
+</b>
+<br>
+<br>
+
+<b>SID</b> : @HttpContext.Current.Application["SID"].ToString()
+@* @Html.TextBox("sid" , @HttpContext.Current.Application["SID"].ToString(),new {  @class="form-control form-inline" })*@
+<br>
+<br>
+<b>SECRET KEY</b> : @HttpContext.Current.Application["SecretKey"].ToString()
+
+<br>
+<br>
+<b>TWILIO MOBILE NO.</b> : @HttpContext.Current.Application["MobileNo"].ToString()
+
+<br>
+<br>
+<b>TWILIO SENDGRID API KEY</b> : @HttpContext.Current.Application["SendGridAPIKey"].ToString()
+
+<br>
+<br>
+
+@Html.ActionLink("Change Credentials", "EditCred", null, new { @class = "btn btn-primary" })
+<br>
+<br>
+<br>
+<br>
+<b style="color:forestgreen;font-size:25px;">
+    Messaging Activiy
+
+</b>
+<br>
+<br>
+<b>
+    Number of messages sent using the above credentials : @HttpContext.Current.Application["MessageCount"].ToString()
+</b>

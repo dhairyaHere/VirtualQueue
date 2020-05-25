@@ -1,0 +1,124 @@
+﻿@model IEnumerable<VirtualQueue.Models.Guest>
+
+@{
+    ViewBag.Title = "SearchResults";
+}
+
+<h2>Search Results</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.guestName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.contact_no)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.groupSize)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.persist)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isVIP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th>
+            Waiting Area Time
+        </th>
+        <th>
+            Pending Area Time
+        </th>
+        <th>
+            Total Waiting Time
+        </th>
+    </tr>
+
+@foreach (var item in Model)
+{
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.guestName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.contact_no)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.groupSize)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.persist)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.isVIP)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.status)
+    </td>
+    <td>
+        @{
+            if (item.status == "Waiting")
+            {
+                TimeSpan s = DateTime.Now.Subtract(item.entry);
+                <p> @s.Hours.ToString():@s.Minutes.ToString():@s.Seconds.ToString()</p>
+            }
+            else
+            {
+                TimeSpan s = item.waiting.Subtract(item.entry);
+                <p> @s.Hours.ToString():@s.Minutes.ToString():@s.Seconds.ToString()</p>
+            }
+
+        }
+    </td>
+    <td>
+        @{
+            if (item.status == "Pending")
+            {
+                TimeSpan s = DateTime.Now.Subtract(item.waiting);
+                <p> @s.Hours.ToString():@s.Minutes.ToString():@s.Seconds.ToString()</p>
+            }
+            else
+            {
+                if (item.status == "Arrived")
+                {
+                    TimeSpan s = item.pending.Subtract(item.waiting);
+                    <p> @s.Hours.ToString():@s.Minutes.ToString():@s.Seconds.ToString()</p>
+                }
+                else 
+                { 
+                        <b>In waiting area</b>
+                }
+
+            }
+        }
+    </td>
+    <td>
+        @{
+            if (item.status == "Arrived")
+            {
+                TimeSpan s = item.pending.Subtract(item.entry);
+                <p> @s.Hours.ToString():@s.Minutes.ToString():@s.Seconds.ToString()</p>
+            }
+            else
+            {
+                TimeSpan s = DateTime.Now.Subtract(item.entry);
+                <p> @s.Hours.ToString():@s.Minutes.ToString():@s.Seconds.ToString()</p>
+                
+            }
+        }
+    </td>
+</tr>
+
+}
+
+</table>
+@Html.ActionLink("Back To Search Menu","Search",null,new { @class="btn btn-warning"})

@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h4>Last In</h4>
+<table id="lgdata" class="table">
+    <tr>
+        <th>
+            Booking ID
+        </th>
+        <th>
+            Guest Name
+        </th>
+        <th></th>
+    </tr>
+    <tbody data-bind="foreach: {data:lastCollection,includeDestroyed: false}">
+        <tr>
+            <td data-bind="text: bookingID"></td>
+            <td data-bind="text: guestName"></td>
+        </tr>
+    </tbody>
+</table><br>
+<h2>Waiting List</h2>
+<table id="gdata" class="table">
+    <tr>
+        <th>
+            Booking ID
+        </th>
+        <th>
+            Guest Name
+        </th>
+        <th></th>
+    </tr>
+    <tbody data-bind="foreach: {data:lookupCollection,includeDestroyed: false}">
+        <tr>
+            <td data-bind="text: bookingID"></td>
+            <td data-bind="text: guestName"></td>
+        </tr>
+    </tbody>
+</table>
+<script src="//code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="~/Scripts/knockout-3.5.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+    viewModel = {
+        lookupCollection: ko.observableArray(),
+    };
+
+    lastModel = {
+        lastCollection: ko.observableArray()
+    }
+
+
+    $(document).ready(function () {
+        setInterval(function () {
+            GetData()
+        }, 2000);
+        try {
+            function GetData() {
+                $.ajax({
+                    type: "GET",
+                    url: "/Display/GetData",
+                }).done(function (data) {
+                    var index;
+                    
+                    viewModel.lookupCollection.destroyAll();
+                    lastModel.lastCollection.destroyAll();
+                    console.log(data[0]);
+                    console.log(data[1]);
+                    if (data[0][0] != null) {
+                        $(data[0]).each(function (index, element) {
+                            lastModel.lastCollection.push(element);
+                        });
+                    }
+                    if (data[1] != null) {
+                        $(data[1]).each(function (index, element) {
+                            viewModel.lookupCollection.push(element);
+                        });
+                    }
+                    
+                    console.log(document.getElementById("gdata"));
+                    ko.applyBindings(viewModel, document.getElementById("gdata"));
+                    ko.applyBindings(lastModel, document.getElementById("lgdata"));
+                    
+                });
+            }
+        } catch (err) {
+            console.log(err)
+        }
+        
+        
+    });
+</script>

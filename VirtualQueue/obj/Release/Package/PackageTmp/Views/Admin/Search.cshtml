@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+}
+<div class="container-fluid" >
+<h2>Search Options </h2>
+<div class="col-md-10" style="font-size:18px;">
+    @using (Html.BeginForm("Search", "Admin", FormMethod.Post))
+    {
+
+     //   &nbsp;&nbsp;&nbsp;
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <br>
+    <b style="margin:15px;">Booking ID</b>
+    @Html.RadioButton("Search", "bid", true)
+
+    //&nbsp;&nbsp;&nbsp;&nbsp;
+    <b style="padding:15px;">Name</b>
+    @Html.RadioButton("Search", "bname",false)
+
+    //&nbsp;&nbsp;&nbsp;&nbsp;
+    <b style="margin:15px;">Contact No.</b>
+    @Html.RadioButton("Search", "bcon",false)
+
+    //&nbsp;&nbsp;&nbsp;&nbsp;
+    <b style="padding:15px;">E-mail</b>
+    @Html.RadioButton("Search", "bmail",false)
+
+    <br><br>
+    <div class="form-group">
+        @Html.Label("Value to Search", new { @id = "searchl", @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBox("searchtb","", null, new { @class = "form-control" })
+            @*@Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })*@
+        </div>
+    </div><br><br>
+    <input id="sub"class="btn btn-primary"  type="submit" text="Search"  style="margin-left:20px"/>
+    }
+</div>
+    </div>
+<script src="//code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(":radio[value=bid]").prop("checked", true);
+        $(":radio[value=bname]").prop("checked", false);
+        $(":radio[value=bmail]").prop("checked", false);
+        $(":radio[value=bcon]").prop("checked", false);
+        
+
+        
+        $(":radio[name=Search]").change(function () {
+            var value = $(this).val();
+            if (value == "bid") {
+                $("#searchl").html("Booking ID");
+            } else if (value == "bname") {
+                $("#searchl").html("Guest Name");
+            } else if (value == "bcon") {
+                $("#searchl").html("Contact No.");
+            } else if (value == "bmail") {
+                $("#searchl").html("Email");
+            }
+        });
+
+    });
+    
+</script>

@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <setParameter name="IIS Web Application Name" value="Default Web Site/" />
+  <setParameter name="VQContext-Web.config Connection String" value="Server=tcp:virtualqueueserver.database.windows.net,1433;Initial Catalog=VirtualQueueDB;Persist Security Info=False;User ID=VirtualQueue;Password=Helloworld@123456;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" />
+</parameters>

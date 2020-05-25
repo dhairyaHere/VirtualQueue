@@ -1,0 +1,21 @@
+﻿@model VirtualQueue.Models.Guest
+
+@{
+    ViewBag.Title = "Arrived";
+}
+
+<h2>Arrived</h2>
+
+<div>
+    <h4>Guest Arrived </h4>
+    <hr />
+    
+    @Model.guestName with booking ID @Model.bookingID has <b style="color:forestgreen;">ARRIVED </b>!
+    <br><br><br><br>
+
+</div>
+<p>
+    @Html.ActionLink("Back to Waiting List", "Index", "Guests") |
+    @Html.ActionLink("Back to Pending List", "PendingList", "Guests") |
+    @Html.ActionLink("Home", "Index", "Home")
+</p>

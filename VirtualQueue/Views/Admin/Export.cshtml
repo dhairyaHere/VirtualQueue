@@ -1,0 +1,89 @@
+﻿@model IEnumerable<VirtualQueue.Models.Guest>
+
+@{
+    ViewBag.Title = "Export";
+}
+
+<h2>Guest Details</h2>
+@Html.ValidationSummary("",new {@class="text-danger" })
+<p>
+    @Html.ActionLink("Export Data as CSV", "Download",null,new { @class="btn btn-primary"})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.bookingID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.guestName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.contact_no)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.groupSize)
+        </th>
+        <th>
+            Opted for Mailing List
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isVIP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.entry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.waiting)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pending)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.bookingID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.guestName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.contact_no)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.groupSize)
+    </td>
+    <td>
+            @Html.DisplayFor(modelItem => item.persist)
+        </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.isVIP)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.status)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.entry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.waiting)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pending)
+        </td>*@
+
+</tr>
+}
+
+</table>

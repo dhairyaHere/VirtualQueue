@@ -1,0 +1,101 @@
+﻿@model IEnumerable<VirtualQueue.Models.Guest>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<meta http-equiv="refresh" content="5">
+<h2>Waiting List</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Booking ID
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.guestName)
+        </th>
+        @if (Session["User"] != null)
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.isVIP)
+            </th>
+            <th>
+                Waiting Time
+            </th>
+        }
+
+
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.bookingID)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.guestName)
+    </td>
+    @if (Session["User"] != null)
+    {
+        if (item.isVIP == true)
+        {
+            <td>
+                <b>** VIP **</b>
+            </td>
+        }
+        else
+        {
+            <td>
+            </td>
+        }
+        <td>
+            @{
+                TimeSpan s = DateTime.Now.Subtract(item.entry);
+                <p class="countup"> @s.Hours.ToString():@s.Minutes.ToString():@s.Seconds.ToString()</p>
+            }
+        </td>
+    }
+
+
+    <td>
+        @if (Session["User"] != null)
+        {
+            @Html.ActionLink("See Details", "Details", new { id = item.bookingID }, new { @class = "btn btn-info" })
+        }
+    </td>
+</tr>
+}
+
+</table>
+<script src="//code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="~/Scripts/knockout-3.5.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.countup').each(function () {
+        var targetdate = $(this).html();
+        var hms = targetdate.split(":")
+        var h = parseInt(hms[0]);
+        var m = parseInt(hms[1]);
+        var s = parseInt(hms[2]);
+        var timer = $(this);
+        var countdownrefesh = setInterval(function () {
+            s = (s + 1) % 60;
+            if (s == 0) {
+                m = (m + 1) % 60;
+                if (m == 0) {
+                    h = (h + 1) % 24;
+                }
+            }
+            t = h + ":" + m + ":" + s;
+            timer.html(t)
+        }, 1000);
+    });
+ });
+
+
+</script>

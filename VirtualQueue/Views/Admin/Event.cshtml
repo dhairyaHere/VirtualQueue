@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Event";
+}
+
+<h2>Change Event Name</h2><br><br>
+<div class="container-fluid">
+    @Html.ValidationSummary("",new { @class="text-danger"})
+@using (Html.BeginForm("Event","Admin",FormMethod.Post))
+{
+    @Html.Label("New Event Name : "); 
+    @Html.TextBox("event_name", HttpContext.Current.Application["EventName"].ToString(),new { @class="form-control"});
+    <br><br>
+    
+    <input type="submit" class="btn btn-primary" value="Change" />
+}
+</div>

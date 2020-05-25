@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="virutalqueue" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\gadar\\OneDrive\\Desktop\\VirtualQueue\\VirtualQueue\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\gadar\\OneDrive\\Desktop\\VirtualQueue\\VirtualQueue\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="VQContext-Web.config Connection String" description="" value="Server=tcp:virtualqueueserver.database.windows.net,1433;Initial Catalog=VirtualQueueDB;Persist Security Info=False;User ID=VirtualQueue;Password=Helloworld@123456;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\gadar\\OneDrive\\Desktop\\VirtualQueue\\VirtualQueue\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='VQContext']/@connectionString" />
+  </parameter>
+</parameters>

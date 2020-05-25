@@ -1,0 +1,65 @@
+﻿
+
+@{
+    ViewBag.Title = "EditCred";
+}
+
+<h2>Modify Twilio API Credentials</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal ">
+    <h4>Provide valid Credentials</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="form-group">
+        @Html.Label("SID : ", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBox("sidtb", HttpContext.Current.Application["SID"].ToString(), new { @class = "form-control-lg", @style = "width:500px" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Secret Key :", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBox("secretkeytb", HttpContext.Current.Application["SecretKey"].ToString(), new { @class = "form-control-lg", @style = "width:500px" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <b class="control-label col-md-2">
+            Twilio Mobile No. :
+        </b>
+        <div class="col-md-10 ">
+            @Html.TextBox("mobiletb", HttpContext.Current.Application["MobileNo"].ToString(), new { @class = "form-control-lg", @style = "width:500px" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <b class="control-label col-md-2">
+            Twilio SendGrid API Key 
+        </b>
+        <div class="col-md-10 ">
+            @Html.TextBox("sendgridtb", HttpContext.Current.Application["SendGridAPIKey"].ToString(), new { @class = "form-control-lg", @style = "width:500px" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to Dashboard", "Dashboard")
+</div>

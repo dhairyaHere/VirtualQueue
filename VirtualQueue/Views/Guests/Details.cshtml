@@ -1,0 +1,110 @@
+﻿@model VirtualQueue.Models.Guest
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Guest Details</h2>
+
+<div>
+    <h4>@Model.guestName ( Booking ID : @Model.bookingID ) </h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <br>
+        <br>
+        <dt>
+            @Html.DisplayNameFor(model => model.bookingID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.bookingID)
+        </dd>
+        <br>
+        <dt>
+            @Html.DisplayNameFor(model => model.guestName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.guestName)
+        </dd>
+        <br>
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+        <br>
+        <dt>
+            @Html.DisplayNameFor(model => model.contact_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contact_no)
+        </dd>
+        <br>
+        <dt>
+            @Html.DisplayNameFor(model => model.groupSize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.groupSize)
+        </dd>
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.persist)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.persist)
+            </dd>*@
+        <br>
+        <dt>
+            @Html.DisplayNameFor(model => model.isVIP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isVIP)
+        </dd>
+        <br>
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <br>
+        <br>
+
+        <dt>
+
+        </dt>
+        <dd>
+            @using (Html.BeginForm("AdmitToPendingLists", "Guests", new { id = Model.bookingID }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <input class="btn btn-primary" type="submit" value="ADMIT">
+                @*@Html.ActionLink("ADMIT ", "AdmitToPendingLists", "Guests", new { id = Model.bookingID }, new { @class = "btn btn-primary" })*@
+            }
+
+        </dd>
+
+    </dl>
+</div>
+<p style="margin-left:100px;">
+
+
+</p>
+<br>
+<br>
+@if (Session["User"] != null)
+{
+    Html.ActionLink("Back to Waiting List", "Index", "Guests");
+}
+else
+{
+    Html.ActionLink("Back to Waiting List", "Index", "Display");
+}
+

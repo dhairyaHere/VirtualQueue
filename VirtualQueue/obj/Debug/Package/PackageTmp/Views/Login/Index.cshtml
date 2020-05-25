@@ -1,0 +1,47 @@
+﻿@model VirtualQueue.Models.Credential
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Staff/Admin Login</h2>
+<br><br>
+<div class="row">
+    <div class="col-md-8">
+        <section id="loginForm">
+            @using (Html.BeginForm("Index", "Login",null, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @*@Html.LabelFor(m => m.roleType, new { @class = "col-md-2 control-label" })*@
+                    <div class="col-md-10">
+                        &nbsp;&nbsp;&nbsp;
+                        <b style="margin:20px;">Staff</b>
+                        @Html.RadioButtonFor(m => m.roleType, "Staff")
+                        <b style="padding:20px;">Admin</b>
+                        @Html.RadioButtonFor(m => m.roleType, "Admin")
+                        @Html.ValidationMessageFor(m => m.roleType, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Log in" class="btn btn-default" />
+                    </div>
+                </div>
+                
+                
+            }
+        </section>
+    </div>
+    
+</div>
